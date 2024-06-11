@@ -56,8 +56,7 @@ class CANN_burak:
         # compute 'distances'
         d = jnp.abs(ravel_sheet[:, None] - (ravel_sheet + self.l * ravel_shift)[None])
         # compute periodic distances
-        #periodic_d = jnp.minimum(d, self.nl - d)  # nl is width of box
-        periodic_d = d  # nl is width of box
+        periodic_d = jnp.minimum(d, self.nl - d)  # nl is width of box
 
         papa = jnp.sum(periodic_d ** 2, axis=-1)  # ran out of names
         w0 = jnp.exp(-self.gamma * papa) - jnp.exp(-self.beta * papa)  # DoG
